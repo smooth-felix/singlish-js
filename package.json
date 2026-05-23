@@ -1,0 +1,36 @@
+{
+  "name": "@felix-tech/singlish-js",
+  "version": "0.1.0",
+  "description": "High performance Singlish to Sinhala Unicode transliteration engine.",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "files": ["dist"],
+  "sideEffects": false,
+  "license": "MIT",
+  "keywords": ["sinhala", "singlish", "transliterate", "unicode", "sls1134"],
+  "scripts": {
+    "build": "tsup && tsc --emitDeclarationOnly",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "biome ci .",
+    "publint": "publint",
+    "attw": "attw --pack"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.2",
+    "@biomejs/biome": "^2.4.15",
+    "publint": "^0.3.21",
+    "tsup": "^8.5.1",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.7"
+  }
+}
