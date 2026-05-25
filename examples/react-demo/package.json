@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@felix-tech/singlish-js": "^0.1.1",
+    "@felix-tech/singlish-js": "^0.1.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
