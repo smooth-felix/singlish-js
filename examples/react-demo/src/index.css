@@ -1,0 +1,23 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #f9f9f7;
+  --surface: #ffffff;
+  --border: #e0e0dc;
+  --text: #1a1a18;
+  --muted: #6b6b66;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --sinhala-font: 'Noto Sans Sinhala', 'Iskoola Pota', sans-serif;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100dvh;
+}

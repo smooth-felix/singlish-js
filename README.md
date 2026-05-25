@@ -24,8 +24,8 @@ import { transliterate } from '@felix-tech/singlish-js';
 transliterate('mama');           // → "මම"
 transliterate('mama gamata yanawa'); // → "මම ගමට යනව"
 transliterate('keels paan');     // → "කීල්ස් පාන්"
-transliterate('shri');           // → "ශ්‍රී"
-transliterate('sathya');         // → "සත්‍ය"
+transliterate('shrii');          // → "ශ්‍රී"
+transliterate('sathYa');         // → "සත්‍ය"
 ```
 
 ---
@@ -86,7 +86,8 @@ ka  → ක    (inherent a)
 kaa → කා   (ā modifier / aela pilla)
 kA  → කැ   (short ae / ketti aeda pilla)
 kAa → කෑ   (long ae / diga aeda pilla)
-ki  → කී   (long ī / diga ispilla — single i = long by convention)
+ki  → කි   (short i / short ispilla)
+kii → කී   (long ī / diga ispilla)
 ku  → කු   (short u / papilla)
 ke  → කෙ   (short e / kombuva)
 ko  → කො   (short o)
@@ -150,14 +151,20 @@ transliterate('amba');    // → "අම්බ" (phonetic: a + m + ba)
 
 ### Conjunct consonants
 
-Conjuncts are formed automatically when `r` or `y` follows a consonant and is itself followed by a vowel. The engine inserts `HAL_MARK + ZWJ` (al-lakuna + zero-width joiner) to bind them.
+Conjuncts use two distinct triggers:
+
+- **Rakaransaya** — lowercase `r` after a consonant: `krama`, `shrii`
+- **Yansaya** — **uppercase `Y`** after a consonant: `sathYa`, `aachaarYa`
+
+Lowercase `y` is always plain ය — no conjunct binding.
 
 | Input    | Sinhala | Structure |
 |----------|---------|-----------|
 | `krama`  | ක්‍රම | Rakaransaya (ra-conjunct) |
-| `shri`   | ශ්‍රී | Rakaransaya |
-| `sathya` | සත්‍ය | Yansaya (ya-conjunct) |
-| `acharya`| අචර්‍ය | Yansaya |
+| `shrii`  | ශ්‍රී | Rakaransaya |
+| `sathYa` | සත්‍ය | Yansaya (ya-conjunct) |
+| `aachaarYa` | ආචාර්‍ය | Yansaya |
+| `sathya` | සත්ය  | separate ත් + ය (no conjunct) |
 
 ### Standalone glyphs via backslash sequences
 

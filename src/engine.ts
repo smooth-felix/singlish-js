@@ -101,10 +101,10 @@ export function transliterate(inputStream: string): string {
     if (activeConsonant) {
       let conjunctSuffix = '';
 
-      // Lookahead: Rakaransaya (-r) or Yansaya (-y) conjunct
-      const lookahead1 = input.substring(cursor, cursor + 1).toLowerCase();
+      // Lookahead: Rakaransaya (lowercase r) or Yansaya (uppercase Y only)
+      const lookahead1 = input.substring(cursor, cursor + 1);
       if (
-        (lookahead1 === 'r' || lookahead1 === 'y') &&
+        (lookahead1 === 'r' || lookahead1 === 'Y') &&
         cursor + 1 < len &&
         /[a-zA-Z]/.test(input[cursor + 1])
       ) {

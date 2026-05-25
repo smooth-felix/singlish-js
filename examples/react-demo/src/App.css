@@ -1,0 +1,279 @@
+/* Layout */
+.app {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 16px 64px;
+}
+
+/* Header */
+.header {
+  padding: 40px 0 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 32px;
+}
+
+.header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.subtitle a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.subtitle a:hover {
+  text-decoration: underline;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin-top: 20px;
+}
+
+.tab {
+  padding: 8px 16px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--muted);
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.tab:hover {
+  color: var(--text);
+}
+
+.tab--active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  font-weight: 500;
+}
+
+/* Demo sections */
+.demo h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.demo-desc {
+  color: var(--muted);
+  font-size: 0.875rem;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+/* Live Input demo */
+.field-label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.roman-input {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  outline: none;
+  background: var(--surface);
+  transition: border-color 0.15s;
+}
+
+.roman-input:focus {
+  border-color: var(--accent);
+}
+
+.sinhala-output {
+  margin-top: 16px;
+  padding: 16px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: var(--sinhala-font);
+  font-size: 2rem;
+  line-height: 1.6;
+  min-height: 72px;
+  word-break: break-word;
+}
+
+.placeholder {
+  color: var(--muted);
+  font-size: 1.4rem;
+}
+
+/* Hint / cheat sheet */
+.hint {
+  margin-top: 20px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.hint summary {
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--text);
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.hint summary::-webkit-details-marker { display: none; }
+.hint summary::before { content: '▸'; }
+details[open] .hint summary::before,
+details.hint[open] > summary::before { content: '▾'; }
+
+.hint ul {
+  margin-top: 8px;
+  padding-left: 20px;
+  line-height: 2;
+}
+
+.hint code {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 5px;
+  font-size: 0.8rem;
+}
+
+/* Editor demo */
+.editor-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 600px) {
+  .editor-grid { grid-template-columns: 1fr; }
+}
+
+.editor-pane {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.pane-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.editor-textarea {
+  flex: 1;
+  padding: 12px;
+  font-size: 0.95rem;
+  border: none;
+  outline: none;
+  resize: none;
+  min-height: 220px;
+  font-family: inherit;
+  background: var(--surface);
+}
+
+.editor-preview {
+  flex: 1;
+  padding: 12px;
+  font-family: var(--sinhala-font);
+  font-size: 1.5rem;
+  line-height: 1.7;
+  min-height: 220px;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+.copy-btn {
+  padding: 3px 10px;
+  font-size: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--surface);
+  cursor: pointer;
+  color: var(--text);
+  transition: background 0.15s;
+}
+
+.copy-btn:hover:not(:disabled) {
+  background: var(--bg);
+}
+
+.copy-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* Phrase table */
+.phrase-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.phrase-table th {
+  text-align: left;
+  padding: 8px 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  border-bottom: 2px solid var(--border);
+}
+
+.phrase-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.phrase-table tr:last-child td {
+  border-bottom: none;
+}
+
+.phrase-table tr:hover td {
+  background: var(--bg);
+}
+
+.phrase-table code {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 2px 6px;
+  font-size: 0.85rem;
+}
+
+.sinhala-cell {
+  font-family: var(--sinhala-font);
+  font-size: 1.3rem;
+}

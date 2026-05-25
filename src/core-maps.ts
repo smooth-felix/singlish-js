@@ -127,7 +127,7 @@ export const DEPENDENT_MODIFIERS: Record<string, string> = {
   oe: "ෝ",
   au: "ෞ",
   // 1-char lowercase
-  i: "ී",
+  i: "ි",
   u: "ු",
   e: "ෙ",
   o: "ො",
