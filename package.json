@@ -14,6 +14,10 @@
   },
   "files": ["dist"],
   "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/smooth-felix/singlish-js"
+  },
   "license": "MIT",
   "keywords": ["sinhala", "singlish", "transliterate", "unicode", "sls1134"],
   "scripts": {
