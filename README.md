@@ -50,8 +50,8 @@ transliterate(""); // → ""
 Single `a` after a consonant is the **inherent vowel** — it produces a bare consonant with no modifier. To write the long ā (ා) you must type `aa`.
 
 ```
-ma   → ම   (bare — inherent a)
-maa  → මා  (long ā modifier)
+ma   → ම
+maa  → මා
 mama → මම
 ```
 
@@ -59,59 +59,59 @@ mama → මම
 
 #### Independent (word-initial / standalone)
 
-| Input              | Sinhala | Name                     |
-| ------------------ | ------- | ------------------------ |
-| `a`                | අ       | short a                  |
-| `aa`               | ආ       | long ā                   |
-| `A`                | ඇ       | short ae _(uppercase A)_ |
-| `Aa`               | ඈ       | long ae _(uppercase Aa)_ |
-| `ae`               | ඈ       | long ae (alias)          |
-| `i`                | ඉ       | short i                  |
-| `ii` / `ie` / `ee` | ඊ       | long ī                   |
-| `u`                | උ       | short u                  |
-| `uu` / `oo`        | ඌ       | long ū                   |
-| `e`                | එ       | short e                  |
-| `ea` / `ei`        | ඒ       | long ē                   |
-| `o`                | ඔ       | short o                  |
-| `oe`               | ඕ       | long ō                   |
-| `ai`               | ඓ       | ai                       |
-| `au`               | ඖ       | au                       |
+| Input              | Sinhala |
+| ------------------ | ------- |
+| `a`                | අ       |
+| `aa`               | ආ       |
+| `A`                | ඇ       |
+| `Aa`               | ඈ       |
+| `ae`               | ඈ       |
+| `i`                | ඉ       |
+| `ii` / `ie` / `ee` | ඊ       |
+| `u`                | උ       |
+| `uu` / `oo`        | ඌ       |
+| `e`                | එ       |
+| `ea` / `ei`        | ඒ       |
+| `o`                | ඔ       |
+| `oe`               | ඕ       |
+| `ai`               | ඓ       |
+| `au`               | ඖ       |
 
 #### Dependent modifiers (after a consonant)
 
 Same input triggers the corresponding pilla instead of an independent vowel.
 
 ```
-ka  → ක    (inherent a)
-kaa → කා   (ā modifier / aela pilla)
-kA  → කැ   (short ae / ketti aeda pilla)
-kAa → කෑ   (long ae / diga aeda pilla)
-ki  → කි   (short i / short ispilla)
-kii → කී   (long ī / diga ispilla)
-ku  → කු   (short u / papilla)
-ke  → කෙ   (short e / kombuva)
-ko  → කො   (short o)
-koe → කෝ   (long ō)
-kea → කේ   (long ē)
+ka  → ක
+kaa → කා
+kA  → කැ
+kAa → කෑ
+ki  → කි
+kii → කී
+ku  → කු
+ke  → කෙ
+ko  → කො
+koe → කෝ
+kea → කේ
 ```
 
 ### Base consonants
 
-| Input | Sinhala |                | Input     | Sinhala |             |
-| ----- | ------- | -------------- | --------- | ------- | ----------- |
-| `k`   | ක       | ka             | `n`       | න       | na (dental) |
-| `g`   | ග       | ga             | `p`       | ප       | pa          |
-| `j`   | ජ       | ja             | `b`       | බ       | ba          |
-| `t`   | ට       | ṭa (retroflex) | `m`       | ම       | ma          |
-| `d`   | ඩ       | ḍa (retroflex) | `y`       | ය       | ya          |
-| `sh`  | ශ       | śa (tāluja)    | `r`       | ර       | ra          |
-| `ch`  | ච       | ca             | `l`       | ල       | la (dental) |
-| `th`  | ත       | ta (dental)    | `v` / `w` | ව       | va          |
-| `dh`  | ද       | da (dental)    | `s`       | ස       | sa          |
-| `h`   | හ       | ha             | `f`       | ෆ       | fa          |
-| `kh`  | ඛ       | kha            | `bh`      | භ       | bha         |
-| `gh`  | ඝ       | gha            | `ph`      | ඵ       | pha         |
-| `q`   | ඣ       | jha            |           |         |             |
+| Input | Sinhala |     | Input     | Sinhala |     |
+| ----- | ------- | --- | --------- | ------- | --- |
+| `k`   | ක       | ka  | `n`       | න       | na  |
+| `g`   | ග       | ga  | `p`       | ප       | pa  |
+| `j`   | ජ       | ja  | `b`       | බ       | ba  |
+| `t`   | ට       | ṭa  | `m`       | ම       | ma  |
+| `d`   | ඩ       | ḍa  | `y`       | ය       | ya  |
+| `sh`  | ශ       | śa  | `r`       | ර       | ra  |
+| `ch`  | ච       | ca  | `l`       | ල       | la  |
+| `th`  | ත       | ta  | `v` / `w` | ව       | va  |
+| `dh`  | ද       | da  | `s`       | ස       | sa  |
+| `h`   | හ       | ha  | `f`       | ෆ       | fa  |
+| `kh`  | ඛ       | kha | `bh`      | භ       | bha |
+| `gh`  | ඝ       | gha | `ph`      | ඵ       | pha |
+| `q`   | ඣ       | jha |           |         |     |
 
 ### Special / aspirated consonants _(case-sensitive)_
 
@@ -132,7 +132,7 @@ Uppercase letters invoke the aspirated or special form.
 | `N`   | ණ       | `n` → න      |
 | `L`   | ළ       | `l` → ල      |
 | `GN`  | ඥ       | jña          |
-| `KN`  | ඤ       | ña (tāluja)  |
+| `KN`  | ඤ       | ña           |
 
 ```ts
 transliterate("Shri"); // → "ෂ්‍රි"
