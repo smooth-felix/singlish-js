@@ -8,47 +8,41 @@ import {
   DEPENDENT_MODIFIERS,
 } from './core-maps';
 
-// Consonant lookup: try original case first (for uppercase specials like 'B', 'N'),
-// then fall back to lowercase (for common consonants like 'k', 'sh').
-function lookupConsonant(
-  map: Record<string, string>,
-  slice: string,
-): string | undefined {
+const CONJUNCT_PREFIX = UNICODE_TOKENS.HAL_MARK + UNICODE_TOKENS.ZWJ;
+
+// Try original case first (handles uppercase specials and A/Aa vowels),
+// then fall back to lowercase for base consonants and common vowels.
+function lookup(map: Record<string, string>, slice: string): string | undefined {
   return map[slice] ?? map[slice.toLowerCase()];
 }
 
-// Vowel lookup: try original case first (for uppercase A/Aa), then lowercase.
-function lookupVowel(
-  map: Record<string, string>,
-  slice: string,
-): string | undefined {
-  return map[slice] ?? map[slice.toLowerCase()];
+function isLatin(char: string): boolean {
+  const code = char.charCodeAt(0);
+  return (code >= 65 && code <= 90) || (code >= 97 && code <= 122);
 }
 
-export function transliterate(inputStream: string): string {
-  let outputBuffer = '';
+export function transliterate(input: string): string {
+  let output = '';
   let cursor = 0;
-  // Keep original case — case-sensitive consonant maps need it.
-  const input = inputStream;
   const len = input.length;
 
   while (cursor < len) {
     // Phase 1 — backslash sequences and non-Latin pass-through
-    const rawChar = input[cursor];
-    if (rawChar === '\\') {
+    const char = input[cursor];
+    if (char === '\\') {
       const nextChar = input[cursor + 1];
       const glyph = nextChar !== undefined ? BACKSLASH_SEQUENCES[nextChar] : undefined;
       if (glyph) {
-        outputBuffer += glyph;
+        output += glyph;
         cursor += 2;
       } else {
-        outputBuffer += rawChar;
+        output += char;
         cursor++;
       }
       continue;
     }
-    if (!/[a-zA-Z]/.test(rawChar)) {
-      outputBuffer += rawChar;
+    if (!isLatin(char)) {
+      output += char;
       cursor++;
       continue;
     }
@@ -58,34 +52,27 @@ export function transliterate(inputStream: string): string {
     let activeConsonant = '';
     let matchSize = 0;
 
-    // Try 4-char then 3-char complex consonants (always lowercase keys)
-    for (let size = 4; size >= 3; size--) {
-      const slice = input.substring(cursor, cursor + size);
-      const found = lookupConsonant(COMPLEX_CONSONANTS, slice);
-      if (found) {
-        activeConsonant = found;
-        matchSize = size;
-        break;
+    const found4 = lookup(COMPLEX_CONSONANTS, input.substring(cursor, cursor + 4));
+    if (found4) {
+      activeConsonant = found4;
+      matchSize = 4;
+    } else {
+      const found3 = lookup(COMPLEX_CONSONANTS, input.substring(cursor, cursor + 3));
+      if (found3) {
+        activeConsonant = found3;
+        matchSize = 3;
       }
     }
 
     if (!activeConsonant) {
-      // Try 2-char: SPECIAL first, then BASE
       const slice2 = input.substring(cursor, cursor + 2);
-      const found2 =
-        lookupConsonant(SPECIAL_CONSONANTS, slice2) ??
-        lookupConsonant(BASE_CONSONANTS, slice2);
-
+      const found2 = lookup(SPECIAL_CONSONANTS, slice2) ?? lookup(BASE_CONSONANTS, slice2);
       if (found2) {
         activeConsonant = found2;
         matchSize = 2;
       } else {
-        // Try 1-char: SPECIAL first, then BASE
         const slice1 = input.substring(cursor, cursor + 1);
-        const found1 =
-          lookupConsonant(SPECIAL_CONSONANTS, slice1) ??
-          lookupConsonant(BASE_CONSONANTS, slice1);
-
+        const found1 = lookup(SPECIAL_CONSONANTS, slice1) ?? lookup(BASE_CONSONANTS, slice1);
         if (found1) {
           activeConsonant = found1;
           matchSize = 1;
@@ -93,69 +80,61 @@ export function transliterate(inputStream: string): string {
       }
     }
 
-    if (matchSize > 0) {
-      cursor += matchSize;
-    }
+    if (matchSize > 0) cursor += matchSize;
 
     // Phase 3 — conjunct + dependent vowel resolution
     if (activeConsonant) {
       let conjunctSuffix = '';
 
-      // Lookahead: Rakaransaya (lowercase r) or Yansaya (uppercase Y only)
-      const lookahead1 = input.substring(cursor, cursor + 1);
+      // Rakaransaya (lowercase r) or Yansaya (uppercase Y only)
+      const lookahead = input[cursor];
       if (
-        (lookahead1 === 'r' || lookahead1 === 'Y') &&
+        (lookahead === 'r' || lookahead === 'Y') &&
         cursor + 1 < len &&
-        /[a-zA-Z]/.test(input[cursor + 1])
+        isLatin(input[cursor + 1])
       ) {
-        const targetGlyph =
-          lookahead1 === 'r' ? BASE_CONSONANTS['r'] : BASE_CONSONANTS['y'];
-        conjunctSuffix = `${UNICODE_TOKENS.HAL_MARK}${UNICODE_TOKENS.ZWJ}${targetGlyph}`;
+        const targetGlyph = lookahead === 'r' ? BASE_CONSONANTS['r'] : BASE_CONSONANTS['y'];
+        conjunctSuffix = CONJUNCT_PREFIX + targetGlyph;
         cursor++;
       }
 
-      const vowelSlice2 = input.substring(cursor, cursor + 2);
-      const vowelSlice1 = input.substring(cursor, cursor + 1);
-
-      const mod2 = lookupVowel(DEPENDENT_MODIFIERS, vowelSlice2);
-      const mod1 = lookupVowel(DEPENDENT_MODIFIERS, vowelSlice1);
+      const mod2 = lookup(DEPENDENT_MODIFIERS, input.substring(cursor, cursor + 2));
+      const mod1 = lookup(DEPENDENT_MODIFIERS, input.substring(cursor, cursor + 1));
 
       if (mod2) {
-        outputBuffer += activeConsonant + conjunctSuffix + mod2;
+        output += activeConsonant + conjunctSuffix + mod2;
         cursor += 2;
       } else if (mod1) {
-        outputBuffer += activeConsonant + conjunctSuffix + mod1;
+        output += activeConsonant + conjunctSuffix + mod1;
         cursor += 1;
-      } else if (vowelSlice1.toLowerCase() === 'a') {
+      } else if (input[cursor] === 'a') {
         // Inherent 'a' — bare consonant, no modifier
-        outputBuffer += activeConsonant + conjunctSuffix;
+        output += activeConsonant + conjunctSuffix;
         cursor += 1;
       } else {
         // No following vowel — append al-lakuna (terminal consonant)
-        outputBuffer += activeConsonant + conjunctSuffix + UNICODE_TOKENS.HAL_MARK;
+        output += activeConsonant + conjunctSuffix + UNICODE_TOKENS.HAL_MARK;
       }
       continue;
     }
 
     // Phase 4 — standalone independent vowel (2 chars → 1 char)
-    const indSlice2 = input.substring(cursor, cursor + 2);
-    const indSlice1 = input.substring(cursor, cursor + 1);
-
-    const ind2 = lookupVowel(INDEPENDENT_VOWELS, indSlice2);
-    const ind1 = lookupVowel(INDEPENDENT_VOWELS, indSlice1);
-
+    const ind2 = lookup(INDEPENDENT_VOWELS, input.substring(cursor, cursor + 2));
     if (ind2) {
-      outputBuffer += ind2;
+      output += ind2;
       cursor += 2;
-    } else if (ind1) {
-      outputBuffer += ind1;
-      cursor += 1;
-    } else {
-      // Safety fallback — emit raw character
-      outputBuffer += input[cursor];
-      cursor++;
+      continue;
     }
+    const ind1 = lookup(INDEPENDENT_VOWELS, input.substring(cursor, cursor + 1));
+    if (ind1) {
+      output += ind1;
+      cursor += 1;
+      continue;
+    }
+
+    // Safety fallback — emit raw character
+    output += input[cursor++];
   }
 
-  return outputBuffer;
+  return output;
 }
