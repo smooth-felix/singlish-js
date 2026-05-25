@@ -19,13 +19,13 @@ yarn add @felix-tech/singlish-js
 ## Quick start
 
 ```ts
-import { transliterate } from '@felix-tech/singlish-js';
+import { transliterate } from "@felix-tech/singlish-js";
 
-transliterate('mama');           // → "මම"
-transliterate('mama gamata yanawa'); // → "මම ගමට යනව"
-transliterate('keels paan');     // → "කීල්ස් පාන්"
-transliterate('shrii');          // → "ශ්‍රී"
-transliterate('sathYa');         // → "සත්‍ය"
+transliterate("mama"); // → "මම"
+transliterate("mama gamata yanawa"); // → "මම ගමට යනව"
+transliterate("keels paan"); // → "කීල්ස් පාන්"
+transliterate("shrii"); // → "ශ්‍රී"
+transliterate("sathYa"); // → "සත්‍ය"
 ```
 
 ---
@@ -37,8 +37,8 @@ transliterate('sathYa');         // → "සත්‍ය"
 Converts a Singlish string to Sinhala Unicode. Non-Latin characters (digits, punctuation, spaces) pass through unchanged. The function never throws.
 
 ```ts
-transliterate('mama gamata yanawa 123!'); // → "මම ගමට යනව 123!"
-transliterate('');                        // → ""
+transliterate("mama gamata yanawa 123!"); // → "මම ගමට යනව 123!"
+transliterate(""); // → ""
 ```
 
 ---
@@ -59,23 +59,23 @@ mama → මම
 
 #### Independent (word-initial / standalone)
 
-| Input | Sinhala | Name |
-|-------|---------|------|
-| `a`   | අ | short a |
-| `aa`  | ආ | long ā |
-| `A`   | ඇ | short ae *(uppercase A)* |
-| `Aa`  | ඈ | long ae *(uppercase Aa)* |
-| `ae`  | ඈ | long ae (alias) |
-| `i`   | ඉ | short i |
-| `ii` / `ie` / `ee` | ඊ | long ī |
-| `u`   | උ | short u |
-| `uu` / `oo` | ඌ | long ū |
-| `e`   | එ | short e |
-| `ea` / `ei` | ඒ | long ē |
-| `o`   | ඔ | short o |
-| `oe`  | ඕ | long ō |
-| `ai`  | ඓ | ai |
-| `au`  | ඖ | au |
+| Input              | Sinhala | Name                     |
+| ------------------ | ------- | ------------------------ |
+| `a`                | අ       | short a                  |
+| `aa`               | ආ       | long ā                   |
+| `A`                | ඇ       | short ae _(uppercase A)_ |
+| `Aa`               | ඈ       | long ae _(uppercase Aa)_ |
+| `ae`               | ඈ       | long ae (alias)          |
+| `i`                | ඉ       | short i                  |
+| `ii` / `ie` / `ee` | ඊ       | long ī                   |
+| `u`                | උ       | short u                  |
+| `uu` / `oo`        | ඌ       | long ū                   |
+| `e`                | එ       | short e                  |
+| `ea` / `ei`        | ඒ       | long ē                   |
+| `o`                | ඔ       | short o                  |
+| `oe`               | ඕ       | long ō                   |
+| `ai`               | ඓ       | ai                       |
+| `au`               | ඖ       | au                       |
 
 #### Dependent modifiers (after a consonant)
 
@@ -97,57 +97,57 @@ kea → කේ   (long ē)
 
 ### Base consonants
 
-| Input | Sinhala | | Input | Sinhala | |
-|-------|---------|-|-------|---------|-|
-| `k`   | ක | ka | `n` | න | na (dental) |
-| `g`   | ග | ga | `p` | ප | pa |
-| `j`   | ජ | ja | `b` | බ | ba |
-| `t`   | ට | ṭa (retroflex) | `m` | ම | ma |
-| `d`   | ඩ | ḍa (retroflex) | `y` | ය | ya |
-| `sh`  | ශ | śa (tāluja) | `r` | ර | ra |
-| `ch`  | ච | ca | `l` | ල | la (dental) |
-| `th`  | ත | ta (dental) | `v` / `w` | ව | va |
-| `dh`  | ද | da (dental) | `s` | ස | sa |
-| `h`   | හ | ha | `f` | ෆ | fa |
-| `kh`  | ඛ | kha | `bh` | භ | bha |
-| `gh`  | ඝ | gha | `ph` | ඵ | pha |
-| `q`   | ඣ | jha | | | |
+| Input | Sinhala |                | Input     | Sinhala |             |
+| ----- | ------- | -------------- | --------- | ------- | ----------- |
+| `k`   | ක       | ka             | `n`       | න       | na (dental) |
+| `g`   | ග       | ga             | `p`       | ප       | pa          |
+| `j`   | ජ       | ja             | `b`       | බ       | ba          |
+| `t`   | ට       | ṭa (retroflex) | `m`       | ම       | ma          |
+| `d`   | ඩ       | ḍa (retroflex) | `y`       | ය       | ya          |
+| `sh`  | ශ       | śa (tāluja)    | `r`       | ර       | ra          |
+| `ch`  | ච       | ca             | `l`       | ල       | la (dental) |
+| `th`  | ත       | ta (dental)    | `v` / `w` | ව       | va          |
+| `dh`  | ද       | da (dental)    | `s`       | ස       | sa          |
+| `h`   | හ       | ha             | `f`       | ෆ       | fa          |
+| `kh`  | ඛ       | kha            | `bh`      | භ       | bha         |
+| `gh`  | ඝ       | gha            | `ph`      | ඵ       | pha         |
+| `q`   | ඣ       | jha            |           |         |             |
 
-### Special / aspirated consonants *(case-sensitive)*
+### Special / aspirated consonants _(case-sensitive)_
 
 Uppercase letters invoke the aspirated or special form.
 
 | Input | Sinhala | vs lowercase |
-|-------|---------|--------------|
-| `Sh`  | ෂ | `sh` → ශ |
-| `Ch`  | ඡ | `ch` → ච |
-| `Th`  | ථ | `th` → ත |
-| `Dh`  | ධ | `dh` → ද |
-| `K`   | ඛ | `k` → ක |
-| `G`   | ඝ | `g` → ග |
-| `T`   | ඨ | `t` → ට |
-| `D`   | ඪ | `d` → ඩ |
-| `P`   | ඵ | `p` → ප |
-| `B`   | ඹ | `b` → බ |
-| `N`   | ණ | `n` → න |
-| `L`   | ළ | `l` → ල |
-| `GN`  | ඥ | jña |
-| `KN`  | ඤ | ña (tāluja) |
+| ----- | ------- | ------------ |
+| `Sh`  | ෂ       | `sh` → ශ     |
+| `Ch`  | ඡ       | `ch` → ච     |
+| `Th`  | ථ       | `th` → ත     |
+| `Dh`  | ධ       | `dh` → ද     |
+| `K`   | ඛ       | `k` → ක      |
+| `G`   | ඝ       | `g` → ග      |
+| `T`   | ඨ       | `t` → ට      |
+| `D`   | ඪ       | `d` → ඩ      |
+| `P`   | ඵ       | `p` → ප      |
+| `B`   | ඹ       | `b` → බ      |
+| `N`   | ණ       | `n` → න      |
+| `L`   | ළ       | `l` → ල      |
+| `GN`  | ඥ       | jña          |
+| `KN`  | ඤ       | ña (tāluja)  |
 
 ```ts
-transliterate('Shri');    // → "ෂ්‍රී"  (murdhaja Sh)
-transliterate('shri');    // → "ශ්‍රී"  (taaluja sh)
-transliterate('aBa');     // → "අඹ"   (B = amba ඹ)
-transliterate('amba');    // → "අම්බ" (phonetic: a + m + ba)
+transliterate("Shri"); // → "ෂ්‍රි"
+transliterate("shri"); // → "ශ්‍රි"
+transliterate("aBa"); // → "අඹ"
+transliterate("amba"); // → "අම්බ" (phonetic: a + m + ba)
 ```
 
 ### Sanyaka (prenasalised) consonants
 
-| Input  | Sinhala | |
-|--------|---------|-|
-| `nng`  | ඟ | kaṇṭaja sanyaka ga |
-| `nnd`  | ඬ | mūrdhaja sanyaka da |
-| `nndh` | ඳ | dantaja sanyaka da |
+| Input  | Sinhala |
+| ------ | ------- |
+| `nng`  | ඟ       |
+| `nnd`  | ඬ       |
+| `nndh` | ඳ       |
 
 ### Conjunct consonants
 
@@ -158,25 +158,25 @@ Conjuncts use two distinct triggers:
 
 Lowercase `y` is always plain ය — no conjunct binding.
 
-| Input    | Sinhala | Structure |
-|----------|---------|-----------|
-| `krama`  | ක්‍රම | Rakaransaya (ra-conjunct) |
-| `shrii`  | ශ්‍රී | Rakaransaya |
-| `sathYa` | සත්‍ය | Yansaya (ya-conjunct) |
-| `aachaarYa` | ආචාර්‍ය | Yansaya |
-| `sathya` | සත්ය  | separate ත් + ය (no conjunct) |
+| Input       | Sinhala |
+| ----------- | ------- |
+| `krama`     | ක්‍රම   |
+| `shrii`     | ශ්‍රී   |
+| `sathYa`    | සත්‍ය   |
+| `aachaarYa` | ආචාර්‍ය |
+| `sathya`    | සත්ය    |
 
 ### Standalone glyphs via backslash sequences
 
-| Input | Sinhala | Name |
-|-------|---------|------|
-| `\n`  | ං | Anusvaraya (anusvāra / bindu) |
-| `\h`  | ඃ | Visargaya |
-| `\N`  | ඞ | Kaṇṭaja Nāyanna (NNGA) |
-| `\R`  | ඍ | Iruyanna (vocalic R) |
+| Input | Sinhala |
+| ----- | ------- |
+| `\n`  | ං       |
+| `\h`  | ඃ       |
+| `\N`  | ඞ       |
+| `\R`  | ඍ       |
 
 ```ts
-transliterate('sitha\\n');  // → "සීතං"
+transliterate("sitha\\n"); // → "සීතං"
 ```
 
 ---
@@ -192,7 +192,7 @@ All output codepoints are in the **Sinhala Unicode block (U+0D80–U+0DFF)**, wi
 The package ships `.d.ts` declarations. No `@types/` package needed.
 
 ```ts
-import type { transliterate } from '@felix-tech/singlish-js'; // fully typed
+import type { transliterate } from "@felix-tech/singlish-js"; // fully typed
 ```
 
 ---
